@@ -8,13 +8,14 @@
       let
         pkgs = nixpkgs.legacyPackages.${system};
 
-        myDevTools = [
-          pkgs.ocaml
-          pkgs.dune_3
-          pkgs.ocamlPackages.ocaml
-          pkgs.ocamlPackages.base
-          pkgs.ocamlPackages.findlib
-          pkgs.ocamlPackages.ounit2
+        myDevTools = with pkgs; [
+          dune_3
+          ocaml
+          ocamlPackages.base
+          ocamlPackages.findlib
+          ocamlPackages.ocaml
+          ocamlPackages.ounit2
+          ocamlformat
         ];
 
       in {
