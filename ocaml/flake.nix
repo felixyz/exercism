@@ -15,6 +15,7 @@
           ocamlPackages.findlib
           ocamlPackages.ocaml
           ocamlPackages.ounit2
+          ocamlPackages.utop
           ocamlformat
         ];
 
