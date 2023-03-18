@@ -25,8 +25,6 @@ let count_nucleotide s c =
              if Char.equal c c2 then acc + 1 else acc ) )
 
 let count_nucleotides s =
-  let init = Ok empty in
-  String.fold s ~init ~f:(fun acc chr ->
-      Result.combine acc (count_nucleotide s chr)
-        ~ok:(fun old count -> Map.set old ~key:chr ~data:count)
-        ~err:(fun e1 e2 -> e1) )
+  String.fold_result s ~init:empty ~f:(fun acc chr ->
+      Result.map (count_nucleotide s chr) ~f:(fun count ->
+          Map.set acc ~key:chr ~data:count ) )
