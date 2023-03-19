@@ -1,4 +1,5 @@
 open Base
+open Result
 
 let empty = Map.empty (module Char)
 
@@ -14,15 +15,11 @@ let check_nucleotides (chars : char list) : (unit, char) Result.t =
       Ok ()
 
 let count_nucleotide s c =
-  match
-    Result.all [check_nucleotides (String.to_list s); check_nucleotides [c]]
-  with
-  | Error bad ->
-      Error bad
-  | _ ->
-      Ok
-        (String.fold s ~init:0 ~f:(fun acc c2 ->
-             if Char.equal c c2 then acc + 1 else acc ) )
+  check_nucleotides (String.to_list s)
+  >>= fun () ->
+  check_nucleotides [c]
+  >>= fun () ->
+  Ok (String.count s ~f:(Char.equal c))
 
 let count_nucleotides s =
   String.fold_result s ~init:empty ~f:(fun acc chr ->
