@@ -1,10 +1,6 @@
-let is_letter chr =
-  let c = Char.code chr in
-  (c >= 65 && c <= 90) || (c >= 97 && c <= 122)
+let is_letter = function 'A' .. 'Z' | 'a' .. 'z' -> true | _ -> false
 
-let is_spacy chr =
-  let c = Char.code chr in
-  c = 32 || c = 45
+let is_spacy = function ' ' | '-' -> true | _ -> false
 
 let acronym txt =
   let pick_initial (possible, acc) chr =
