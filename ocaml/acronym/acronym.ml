@@ -10,7 +10,9 @@ let acronym txt =
     | false ->
         (possible || is_spacy chr, acc)
   in
-  String.fold_left pick_initial (true, "") txt |> snd |> String.uppercase_ascii
+  txt |> String.uppercase_ascii
+  |> String.fold_left pick_initial (true, "")
+  |> snd
 
 (* open Str
 
