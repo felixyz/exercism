@@ -17,6 +17,7 @@
           ocamlPackages.ounit2
           ocamlPackages.utop
           ocamlformat
+          opam
         ];
 
       in {
