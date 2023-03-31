@@ -1,8 +1,11 @@
 let raindrop n =
-  let sounds =
-    [ (3, "Pling"); (5, "Plang"); (7, "Plong") ]
-    |> List.filter (fun (fact, _) -> n mod fact = 0)
-    |> List.map snd
-    |> List.fold_left ( ^ ) ""
-  in
-  if String.length sounds > 0 then sounds else Int.to_string n
+  match
+    [(3, "Pling"); (5, "Plang"); (7, "Plong")]
+    |> List.filter_map (fun (fact, sound) ->
+           match n mod fact with 0 -> Some sound | _ -> None )
+    |> String.concat ""
+  with
+  | "" ->
+      Int.to_string n
+  | sounds ->
+      sounds
