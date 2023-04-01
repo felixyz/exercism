@@ -16,6 +16,7 @@
           ocamlPackages.ocaml
           ocamlPackages.ounit2
           ocamlPackages.utop
+          ocamlPackages.qcheck
           ocamlformat
           opam
         ];
