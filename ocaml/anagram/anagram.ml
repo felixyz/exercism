@@ -1,10 +1,11 @@
 open Base
 
 let anagrams target candidates =
-  let normalize str =
-    String.lowercase str |> String.to_list |> List.sort ~compare:Char.compare
-  in
-  let tl = String.lowercase target and tn = normalize target in
+  let normalize str = str |> String.to_list |> List.sort ~compare:Char.compare in
+  let tl = String.lowercase target in
+  let tn = normalize tl in
   candidates
-  |> List.filter ~f:(fun cand -> String.lowercase cand |> Poly.(equal tl) |> not)
-  |> List.filter ~f:(fun cand -> normalize cand |> Poly.(equal tn))
+  |> List.filter ~f:(fun cand ->
+         let cl = String.lowercase cand in
+         let cn = normalize cl in
+         (not Poly.(equal tl cl)) && Poly.(equal tn cn) )
