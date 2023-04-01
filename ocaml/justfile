@@ -1,0 +1,14 @@
+default:
+  @just --list --justfile {{justfile()}}
+
+[no-cd]
+format FILE:
+  #!/usr/bin/env bash
+  set -euo pipefail
+  echo "Formatting {{FILE}}"
+  ocamlformat --enable-outside-detected-project {{FILE}} | ifne sponge {{FILE}}
+
+[no-cd]
+format-all:
+  find . -maxdepth 1 -name "*.ml" -exec just format {} \;
+

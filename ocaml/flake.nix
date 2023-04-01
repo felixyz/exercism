@@ -20,6 +20,8 @@
           ocamlPackages.qcheck
           ocamlformat
           opam
+
+          just
         ];
 
       in {
