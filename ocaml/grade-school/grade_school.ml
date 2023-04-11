@@ -11,6 +11,4 @@ let grade grade school = Map.find_multi school grade
 
 let sorted school = school |> Map.map ~f:(List.sort ~compare:String.compare)
 
-let roster school =
-  school |> sorted |> Map.to_sequence |> Sequence.to_list
-  |> List.concat_map ~f:snd
+let roster school = school |> sorted |> Map.data |> List.concat
